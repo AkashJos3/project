@@ -27,7 +27,8 @@ const Register = () => {
             navigate('/login');
         } catch (err) {
             console.error(err);
-            setError(err.response?.data?.error || 'Registration failed. Check console for details.');
+            const errorMsg = err.response?.data?.error || `Error: ${err.message} (Status: ${err.response?.status || 'Unknown'})`;
+            setError(errorMsg);
         }
     };
 
