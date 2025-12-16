@@ -29,6 +29,13 @@ def post_job():
 def my_jobs():
     current_user_id = get_jwt_identity()
     jobs = Job.query.filter_by(employer_id=current_user_id).all()
+    return jsonify([
+        {
+            "id": j.id,
+            "title": j.title,
+            "location": j.location,
+            "salary": j.salary
+        } for j in jobs
     ]), 200
 
 @employer_bp.route('/job/<int:id>', methods=['PUT', 'DELETE'])
