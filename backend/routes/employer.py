@@ -41,7 +41,7 @@ def my_jobs():
 @employer_bp.route('/job/<int:id>', methods=['PUT', 'DELETE'])
 @jwt_required()
 def manage_job(id):
-    current_user_id = get_jwt_identity()
+    current_user_id = int(get_jwt_identity())
     job = Job.query.get_or_404(id)
     
     if job.employer_id != current_user_id:
@@ -66,7 +66,7 @@ def manage_job(id):
 @employer_bp.route('/job/<int:id>/applicants', methods=['GET'])
 @jwt_required()
 def view_applicants(id):
-    current_user_id = get_jwt_identity()
+    current_user_id = int(get_jwt_identity())
     job = Job.query.get_or_404(id)
     
     if job.employer_id != current_user_id:
