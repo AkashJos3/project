@@ -8,7 +8,7 @@ employer_bp = Blueprint('employer', __name__)
 @employer_bp.route('/post-job', methods=['POST'])
 @jwt_required()
 def post_job():
-    current_user_id = get_jwt_identity()
+    current_user_id = int(get_jwt_identity())
     data = request.json
     
     job = Job(

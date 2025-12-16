@@ -3,7 +3,22 @@ from models import User
 from extensions import db
 from flask_jwt_extended import jwt_required
 
+from models import User, Job # Added Job
+
 admin_bp = Blueprint('admin', __name__)
+
+@admin_bp.route('/debug-jobs', methods=['GET'])
+def debug_jobs():
+    try:
+        jobs = Job.query.all()
+        return jsonify([{
+            "id": j.id, 
+            "title": j.title, 
+            "emp_id": j.employer_id,
+            "emp_type": str(type(j.employer_id))
+        } for j in jobs]), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @admin_bp.route('/users', methods=['GET'])
 @jwt_required()
