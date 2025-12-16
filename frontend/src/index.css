@@ -2,6 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-gray-50 text-gray-900;
+@layer base {
+  body {
+    @apply bg-deep-black text-white font-inter overflow-x-hidden;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-deep-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-soft-black border border-neon-green rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neon-green;
+}
+
+/* Glitch Effect Keyframes (basic version) */
+@keyframes glitch {
+  0% {
+    transform: translate(0)
+  }
+
+  20% {
+    transform: translate(-2px, 2px)
+  }
+
+  40% {
+    transform: translate(-2px, -2px)
+  }
+
+  60% {
+    transform: translate(2px, 2px)
+  }
+
+  80% {
+    transform: translate(2px, -2px)
+  }
+
+  100% {
+    transform: translate(0)
+  }
+}
+
+.animate-glitch {
+  animation: glitch 1s infinite linear alternate-reverse;
 }

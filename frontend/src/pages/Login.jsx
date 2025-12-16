@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -26,39 +27,67 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] bg-gray-50">
-            <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
-                <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Login to StudWork</h2>
-                {error && <div className="bg-red-100 text-red-700 p-3 rounded mb-4">{error}</div>}
-                <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex items-center justify-center min-h-screen bg-deep-black bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-soft-black via-deep-black to-deep-black pt-16">
+            <div className="absolute w-full h-full overflow-hidden pointer-events-none">
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-green/5 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-electric-purple/5 rounded-full blur-3xl"></div>
+            </div>
+
+            <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="w-full max-w-md p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl relative z-10"
+            >
+                <div className="mb-8 text-center">
+                    <h2 className="text-3xl font-bold font-orbitron text-white tracking-wider mb-2">WELCOME BACK</h2>
+                    <p className="text-gray-400 font-inter text-sm">Enter the system protocol</p>
+                </div>
+
+                {error && (
+                    <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-lg mb-6 text-sm font-inter text-center">
+                        {error}
+                    </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Email</label>
+                        <label className="block text-xs font-bold text-neon-green uppercase font-orbitron tracking-widest mb-2 ml-1">Email Address</label>
                         <input
                             type="email"
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                            className="w-full bg-soft-black/50 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-neon-green focus:shadow-[0_0_15px_rgba(57,255,20,0.1)] transition-all font-inter"
+                            placeholder="user@example.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Password</label>
+                        <label className="block text-xs font-bold text-neon-green uppercase font-orbitron tracking-widest mb-2 ml-1">Password</label>
                         <input
                             type="password"
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                            className="w-full bg-soft-black/50 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-neon-green focus:shadow-[0_0_15px_rgba(57,255,20,0.1)] transition-all font-inter"
+                            placeholder="••••••••"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                     </div>
+                    
                     <button
                         type="submit"
-                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        className="w-full py-3.5 px-4 bg-gradient-to-r from-neon-green to-neon-cyan rounded-lg text-black font-bold font-orbitron tracking-wider hover:shadow-[0_0_20px_rgba(57,255,20,0.4)] transition-all transform hover:-translate-y-0.5 relative overflow-hidden group"
                     >
-                        Login
+                        <span className="relative z-10">ACCESS SYSTEM</span>
                     </button>
+                    
+                    <div className="text-center mt-6">
+                        <Link to="/register" className="text-sm text-gray-400 hover:text-white transition-colors font-inter">
+                            New user? <span className="text-neon-cyan hover:underline">Create an account</span>
+                        </Link>
+                    </div>
                 </form>
-            </div>
+            </motion.div>
         </div>
     );
 };
