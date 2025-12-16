@@ -27,5 +27,16 @@ def verify_employer(id):
     if user and user.role == 'employer':
         user.verified = True
         db.session.commit()
-        return jsonify({"message": "Employer verified"}), 200
+        return jsonify({"message": "Employer account verified"}), 200
     return jsonify({"error": "Invalid user or not an employer"}), 404
+
+# WARNING: This is a dangerous route for fixing schema issues on production.
+# In a real app, protect this heavily or use migrations.
+@admin_bp.route('/force-db-reset', methods=['GET'])
+def force_db_reset():
+    try:
+        db.drop_all()
+        db.create_all()
+        return jsonify({"message": "Database has been nuked and rebuilt successfully."}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
