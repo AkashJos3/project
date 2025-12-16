@@ -33,8 +33,11 @@ def my_jobs():
         {
             "id": j.id,
             "title": j.title,
+            "description": j.description,
             "location": j.location,
-            "salary": j.salary
+            "salary": j.salary,
+            "category": j.category,
+            "duration": j.duration
         } for j in jobs
     ]), 200
 

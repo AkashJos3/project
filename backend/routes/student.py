@@ -24,7 +24,7 @@ def view_jobs():
             "duration": j.duration,
             "employer_id": j.employer_id,
             "employer_name": User.query.get(j.employer_id).name if User.query.get(j.employer_id) else "Unknown",
-            "has_applied": any(app.student_id == get_jwt_identity() for app in j.applications) if get_jwt_identity() else False
+            "has_applied": any(app.student_id == int(get_jwt_identity()) for app in j.applications) if get_jwt_identity() else False
         } for j in jobs
     ]), 200
 

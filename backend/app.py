@@ -39,6 +39,10 @@ def create_app():
         else:
             return send_from_directory(app.static_folder, 'index.html')
 
+    @app.errorhandler(404)
+    def not_found(e):
+        return send_from_directory(app.static_folder, 'index.html')
+            
     return app
 
 app = create_app()
