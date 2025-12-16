@@ -78,7 +78,8 @@ const EmployerDashboard = () => {
             fetchMyJobs();
         } catch (error) {
             console.error(error);
-            alert('Operation failed');
+            const msg = error.response?.data?.error || error.response?.data?.message || error.message || 'Operation failed';
+            alert(`Error: ${msg}`);
         }
     };
 
